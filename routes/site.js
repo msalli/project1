@@ -19,9 +19,9 @@ var express = require('express'),
   });
 
   //home page setup
-  router.get('/home', function (req, res) {
-    res.render('home');
-  });
+  // router.get('/home', function (req, res) {
+  //   res.render('home');
+  // });
 
 
 

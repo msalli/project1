@@ -65,6 +65,14 @@ passport.deserializeUser(function (id, done) {
 });
 
 
+//homepage setup
+app.get('/home', function (req, res) {
+  res.render('home', {
+    isAuthenticated: req.isAuthenticated(),
+    user: req.user
+  });
+});
+
 //set up sign up page
 app.get('/index/signup', function (req, res) {
   if(!req.user) {
@@ -92,30 +100,23 @@ app.get('/index/login', function (req, res) {
     res.render('login', {message: null});
   }
   else {
-    res.redirect('/home');
+    res.redirect('home');
   }
 });
 
 //form on login page
 app.post('/login', passport.authenticate('local', {
   successRedirect: '/home',
-  failureRedirect: '/login',
+  failureRedirect: 'index/login',
   failureFlash: true
 }));
 
 
-//homepage setup
-app.get('/home', function (req, res) {
-  res.render('home', {
-    isAuthenticated: req.isAuthenticated(),
-    user: req.user
-  });
-});
 
 //passport logout
 app.get('/logout', function (req, res) {
   req.logout();
-  res.redirect('/index');
+  res.redirect('/');
 });
 
 
