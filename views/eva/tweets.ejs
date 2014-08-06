@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title> Eva Chen - Tweets </title>
+</head>
+<body>
+
+<nav>
+  <a href="/">welcome page</a>
+</nav>
+
+<header>
+    <h1>Eva Chen</h1>
+    <h3><%= tweets[0].user.description %></h3>
+    <img src="https://pbs.twimg.com/profile_images/447527132097286144/t9IvCFgb.png">
+</header>
+
+
+  <a href="/eva/tweets">Twitter</a>
+  <a href="/eva/insta">Instagram</a>
+
+
+
+<div>
+  <% tweets.forEach(function (tweet) { %>
+    <p><h4>Tweet: <%= tweet.text %></h4></p>
+    <p>Retweets: <%= tweet.retweet_count %> Favorites: <%= tweet.favorite_count %></p>
+    <p>Time Posted: <%= tweet.created_at %></p>
+  <% }) %>
+</div>
+
+
+
+</body>
+</html>
+
