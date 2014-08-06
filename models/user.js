@@ -74,7 +74,39 @@ module.exports = function (sequelize, DataTypes) {
     } //closing outer classMethods
   ); //closing User function
 
-
+  //USER AUTHENTICATION
+  passport.use(new passportLocal.Strategy({
+    //un and pw need to match what is in ejs form
+    usernameField: 'username',
+    passwordField: 'password',
+    passReqToCallback: true //will use req as a param - allows us to do flash messages
+  },
+  function (req, username, password, done) {
+    User.find({
+      where: {
+        username: username
+      }
+    }) //closing find
+    //this done is not param, is from sequelize
+    .done(function (error, user) {
+      if (error) {
+        console.log(error);
+        //err: db issues
+        return done(err, req.flash('loginMessage', 'Oops! Something went wrong!'));
+      }
+      if (user === null) {
+        //null, false: user mess up
+        return done(null, false, req.flash('loginMessage', 'Username does not exist.'));
+      }
+      if ((User.comparePass(password, user.password)) !== true) {
+        return done(null, false, req.flash('loginMessage', 'Invalid password.'));
+      }
+      //calling out param callback
+      //user: login success!
+      done(null, user);
+    }); //closing .done
+  } //closing function
+  )); //closing passport.use
 
 
 

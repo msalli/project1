@@ -21,7 +21,8 @@ var express = require('express'),
     //ROUTES
     site = require('./routes/site'),
     eva = require('./routes/eva'),
-    db = require('./models/index')
+
+    db = require('./models/index'),
     app = express();
 
 
@@ -35,9 +36,34 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+app.use(cookieSession ({
+  secret: 'thisismysecretkey',
+  name: 'cookie created by Alli',
+  maxage: 1000000
+}));
+
+
 //ROUTES
 app.use(site);
 app.use(eva);
+
+//prepare serialize
+//will store user's id on login
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+//prepare deserialize
+passport.deserializeUser(function (id, done) {
+  db.user.find({
+    where: {
+      id: id
+    }
+  }).done(function (error, user) {
+    done(error, user);
+  });
+});
+
 
 //set up sign up page
 app.get('/index/signup', function (req, res) {
@@ -60,6 +86,37 @@ app.post('/signup', function (req, res) {
     });
 });
 
+//login page setup
+app.get('/index/login', function (req, res) {
+  if(!req.user) {
+    res.render('login', {message: null});
+  }
+  else {
+    res.redirect('/home');
+  }
+});
+
+//form on login page
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/home',
+  failureRedirect: '/login',
+  failureFlash: true
+}));
+
+
+//homepage setup
+app.get('/home', function (req, res) {
+  res.render('home', {
+    isAuthenticated: req.isAuthenticated(),
+    user: req.user
+  });
+});
+
+//passport logout
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/index');
+});
 
 
 
