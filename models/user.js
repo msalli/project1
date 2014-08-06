@@ -41,21 +41,29 @@ module.exports = function (sequelize, DataTypes) {
           return bcrypt.compareSync(userpass, dbpass);
         },
         //create new user
-        createNewUser: function (username, password, err, success) {
+        createNewUser: function (firstname, lastname, username, password, err, success) {
           if (password.length < 6) {
             err({message: "Password must be more than 6 characters."});
           }
           else {
             User.create({
+              firstname: firstname,
+              lastname: lastname,
               username: username, //referencing param
               password: User.encryptPass(password) //password in () is param
             }).error(function(error) {
               console.log(error);
+              if(error.firstname) {
+                err({message: "You must enter your first name."});
+              }
+              if(error.lastname) {
+                err({message: "You must enter your last name."});
+              }
               if(error.username) {
                 err({message: "You username must be at least 6 characters."});
               }
               else {
-                err({message: "An account with that username already exists!"});
+                err({message: "Oh snap. An account with that username already exists!"});
               }
             }).success(function (user) {
               success({message: "It's official! Go ahead and login."});
@@ -66,6 +74,11 @@ module.exports = function (sequelize, DataTypes) {
     } //closing outer classMethods
   ); //closing User function
 
+
+
+
+
+  return User;
 }; //closing module.exports function
 
 

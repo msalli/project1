@@ -1,15 +1,27 @@
     //all modules
 var express = require('express'),
-    Instagram = require('instagram-node-lib'),
     bodyParser = require('body-parser'),
+
+    //AUTHORIZATION AUTHENTICATION
+    passport = require('passport'),
+    passportLocal = require('passport-local'),
+    cookieParser = require('cookie-parser'),
+    cookieSession = require('cookie-session'),
+    flash = require('connect-flash'),
+    
+    //API LIBRARIES
     request = require('request'),
     _ = require('lodash'),
     OAuth = require('oauth'),
+    Instagram = require('instagram-node-lib'),
     tumblr = require('tumblr.js'),
+
+
     
     //ROUTES
     site = require('./routes/site'),
     eva = require('./routes/eva'),
+    db = require('./models/index')
     app = express();
 
 
@@ -17,8 +29,39 @@ app.set('view engine', 'ejs');
 require('locus');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
+
+//AUTHORIZATION and AUTHENTICATION
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+//ROUTES
 app.use(site);
 app.use(eva);
+
+//set up sign up page
+app.get('/index/signup', function (req, res) {
+  if(!req.user) {
+    res.render('signup', {message: null});
+  }
+  else {
+    res.redirect('/home');
+  }
+});
+
+//form on signup page
+app.post('/signup', function (req, res) {
+  db.user.createNewUser(req.body.firstname, req.body.lastname, req.body.username, req.body.password,
+    function(err) {
+      res.render('signup', {message: err.message, username: req.body.username});
+    },
+    function(success) {
+      res.render('index', {message: success.message});
+    });
+});
+
+
+
 
 
 
