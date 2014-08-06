@@ -154,6 +154,6 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
 
 
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
 console.log("runnin shit on port 3000");
 });
