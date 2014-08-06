@@ -16,6 +16,8 @@
     "instagram-node-lib": "^0.1.1",
     "lodash": "^2.4.1",
     "oauth": "^0.9.12",
+    "passport": "^0.2.0",
+    "passport-local": "^1.0.0",
     "pg": "^3.4.0",
     "request": "^2.39.0",
     "sequelize": "^1.7.9",
