@@ -3,18 +3,27 @@
 <head>
   <title>Project One - GA WDI</title>
 </head>
-
-
 <body>
 
+<% if (!isAuthenticated) { %>
+
+<h1>You must be <a href="/login">logged in</a> to view this page</h1>
+
+<% } else { %>
+    
     <nav>
-        <a href="/">welcome page</a>
-        <a href="/index/login">login</a>
+        <a href="/home">home</a>
+        <a href="/login">login</a>
         <a href="/index/signup">sign up!</a>
         <a href="/logout">logout</a>
     </nav>
 
+    <h3>Check out our influencers</h3>
+      <p>Eva Chen</p>
+      <p>Editor-in-Chief, Lucky Magazine</p>
+      <a href="/eva/eva"><img src="https://pbs.twimg.com/profile_images/447527132097286144/t9IvCFgb.png"></a> 
 
+<% } %>
 
 </body>
 </html>

@@ -9,8 +9,8 @@
 
     <nav>
         <a href="/">welcome page</a>
-        <a href="/index/login">login</a>
-        <a href="/index/signup">sign up!</a>
+        <a href="/login">login</a>
+        
     </nav>
 
     <p>
@@ -19,19 +19,21 @@
 
     <form method="post" action="/login">
       <p>
-        <input type="text" name="username" placeholder="enter username" autofocus>
+        <label for="user">Username: </label>
+        <input type="text" name="username" id="user" placeholder="enter username" autofocus>
       </p>
 
       <p>
-        <input type="password" name="password" placeholder="enter password">
+        <label for="pass">Password: </label>
+        <input type="password" name="password" id="pass" placeholder="enter password">
       </p>
 
       <p>
-        <input type="submit">
+        <input type="submit" value="Log In">
       </p>
     </form>
   
-
+    <a href="/index/signup">Don't have an account? Sign up here!</a>
 
 </body>
 </html>
