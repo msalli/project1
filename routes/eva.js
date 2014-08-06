@@ -34,7 +34,9 @@ var express = require('express'),
 
 
 
-
+router.get('/eva/eva', function (req, res) {
+  res.render('eva/eva');
+});
 
 
 //eva tweets page setup

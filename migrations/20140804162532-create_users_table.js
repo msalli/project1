@@ -16,11 +16,6 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false
       },
-      email: {
-        type: DataTypes.STRING,
-        isEmail: true,
-        allowNull: false
-      },
       username: {
         type: DataTypes.STRING,
         allowNull: false
