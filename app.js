@@ -1,6 +1,8 @@
-    //all modules
+//all modules
 var express = require('express'),
     bodyParser = require('body-parser'),
+    db = require('./models/index'),
+    app = express(),
 
     //AUTHORIZATION AUTHENTICATION
     passport = require('passport'),
@@ -15,15 +17,12 @@ var express = require('express'),
     OAuth = require('oauth'),
     Instagram = require('instagram-node-lib'),
     tumblr = require('tumblr.js'),
-
-
     
     //ROUTES
     site = require('./routes/site'),
-    eva = require('./routes/eva'),
+    eva = require('./routes/eva');
 
-    db = require('./models/index'),
-    app = express();
+    
 
 
 app.set('view engine', 'ejs');
@@ -65,61 +64,6 @@ passport.deserializeUser(function (id, done) {
 });
 
 
-//homepage setup
-app.get('/home', function (req, res) {
-  res.render('home', {
-    isAuthenticated: req.isAuthenticated(),
-    user: req.user
-  });
-});
-
-//set up sign up page
-app.get('/index/signup', function (req, res) {
-  if(!req.user) {
-    res.render('signup', {message: null});
-  }
-  else {
-    res.redirect('/home');
-  }
-});
-
-//form on signup page
-app.post('/signup', function (req, res) {
-  db.user.createNewUser(req.body.firstname, req.body.lastname, req.body.username, req.body.password,
-    function(err) {
-      res.render('signup', {message: err.message, username: req.body.username});
-    },
-    function(success) {
-      res.render('index', {message: success.message});
-    });
-});
-
-//login page setup
-app.get('/index/login', function (req, res) {
-  if(!req.user) {
-    res.render('login', {message: null});
-  }
-  else {
-    res.redirect('home');
-  }
-});
-
-//form on login page
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/home',
-  failureRedirect: 'index/login',
-  failureFlash: true
-}));
-
-
-
-//passport logout
-app.get('/logout', function (req, res) {
-  req.logout();
-  res.redirect('/');
-});
-
-
 
 
 
@@ -157,3 +101,5 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
 app.listen(process.env.PORT || 3000, function() {
 console.log("runnin shit on port 3000");
 });
+
+module.exports = app;
