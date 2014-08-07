@@ -1,19 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title> Eva Chen - Hub </title>
-</head>
-<body>
+<%-include../header.ejs %>
 
-<nav>
-  <a href="/home">home</a>
-</nav>
+<% if (!isAuthenticated) { %>
 
-<header>
+<h1>You must be <a href="/login">logged in</a> to view this page</h1>
+
+<% } else { %>
+    
+
+
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+         <div class="navbar-header">
+          <ul class="nav navbar-nav">
+            <li><a href="/home">home</a></li>
+            <li><a href="/logout">logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<div>
     <h1>Eva Chen</h1>
     <h3>editor in chief/compulsive shopper/new yorker/nerd</h3>
     <a href="/eva/eva"><img src="https://pbs.twimg.com/profile_images/447527132097286144/t9IvCFgb.png"></a> 
-</header>
+</div>
 
   <p>Some Quick Stats:</p>
   <p>Prada Saffiano center part plaited tee statement indigo Lanvin. Leather tote Hermès knitwear bandeau maxi cable knit. Paris minimal sneaker strong eyebrows denim. Pastel playsuit razor pleats dove grey rings Cara D. skirt ribbed Acne.
@@ -30,5 +40,7 @@ Bomber So-Cal chignon dress Saint Laurent relaxed skort grunge. Print cashmere J
     <input type="submit" value="Favorite">
   </form>
 
-</body>
-</html>
+
+<%-include../footer.ejs %>
+
+<% } %>

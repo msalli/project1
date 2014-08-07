@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Project One - GA WDI</title>
-</head>
-<body>
+<%-include header.ejs %>
 
 <% if (!isAuthenticated) { %>
 
@@ -11,19 +6,58 @@
 
 <% } else { %>
     
-    <nav>
-        <a href="/home">home</a>
-        <a href="/login">login</a>
-        <a href="/index/signup">sign up!</a>
-        <a href="/logout">logout</a>
+
+
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+         <div class="navbar-header">
+          <ul class="nav navbar-nav">
+            <li><a href="/home">home</a></li>
+            <li><a href="/logout">logout</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
 
-    <h3>Check out our influencers</h3>
-      <p>Eva Chen</p>
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center">
+        crème
+      </h1>
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col-md-12">
+      <p class="text-center">
+        Check out our influencers
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <a href="/eva/eva"><p>Eva Chen</p></a> 
       <p>Editor-in-Chief, Lucky Magazine</p>
-      <a href="/eva/eva"><img src="https://pbs.twimg.com/profile_images/447527132097286144/t9IvCFgb.png"></a> 
+        <form action="POST ROUTE" method="post">
+          <input type="hidden" name="person" value="eva">
+        </form>
+   
+    </div>
+
+    <div class="col-md-4">
+      <a href="/eva/eva"><p>Eva Chen</p></a> 
+      <p>Editor-in-Chief, Lucky Magazine</p>
+    
+    </div>
+
+     <div class="col-md-4">
+      <a href="/eva/eva"><p>Eva Chen</p></a> 
+      <p>Editor-in-Chief, Lucky Magazine</p>
+      
+    </div>
+  </div>
+
+
+
+<%-include footer.ejs %>
 
 <% } %>
-
-</body>
-</html>

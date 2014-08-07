@@ -94,7 +94,13 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
       var allTweets = JSON.parse(data);
       callback(allTweets);
     });
-  }; 
+  };
+
+//set up function to pull instagram user id
+ // var getPics = function (userId, callback) {
+ //  Instagram.users.recent({ user_id: userId,
+ //    complete:function(user) {
+ //      console.log(user);
   
 
   //set up pages
@@ -110,19 +116,12 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
     }
   });
 
-  //homepage setup
-  // app.get('/home', function (req, res) {
-  //   if(!req.user) {
-  //     res.render('login', {message: null, username: ''});
-  //   }
-  //   else {
-  //     res.render('index');
-  //   }
-  // });
-
 
 app.get('/eva/eva', function (req, res) {
-  res.render('eva/eva');
+  res.render('eva/eva', {
+      isAuthenticated: req.isAuthenticated(),
+      user: req.user
+    });
 });
 
 
@@ -145,6 +144,7 @@ app.get('/eva/insta', function (req, res) {
     }});
 });
 
+  //set up home page
   app.get('/home', function (req, res) {
     res.render('home', {
       isAuthenticated: req.isAuthenticated(),
