@@ -1,0 +1,30 @@
+<%-include../header.ejs %>
+
+
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <ul class="nav navbar-nav">
+          <li><a href="/home">home</a></li>
+          <li><a href="/eva/search">search</a></li>
+          <li><a href="/logout">logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <p>Search Twitter</p>
+  <form action="/search">
+    <input type="text" name="handle" placeholder="oscarprgirl">
+    <input type="submit">
+  </form>
+
+   <p>Search Instagram</p>
+   <form action="/searchinsta">
+    <input type="text" name="insta" placeholder="oscarprgirl">
+    <input type="submit">
+  </form>
+
+<%-include../footer.ejs %>
+

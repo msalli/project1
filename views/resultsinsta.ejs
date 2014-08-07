@@ -1,0 +1,27 @@
+<%-include header.ejs %>
+
+
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+         <div class="navbar-header">
+          <ul class="nav navbar-nav">
+            <li><a href="/home">home</a></li>
+            <li><a href="/eva/search">search</a></li>
+            <li><a href="/logout">logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <div>
+      <% users.forEach(function (user) { %>
+        <p><img src="<%= user.images.low_resolution.url %>"></p>
+        <p><a href="<%= user.link %>">Visit Instagram</a></p>
+        <p><%= user.caption.text %></p>
+        <p>Filter Used: <%= user.filter %></p>
+        <p>Likes: <%=  user.likes.count %> Comment Count: <%= user.comments.count %></p>
+      <% }) %>
+    </div>
+
+<%-include footer.ejs %>

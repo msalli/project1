@@ -95,12 +95,6 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
       callback(allTweets);
     });
   };
-
-//set up function to pull instagram user id
- // var getPics = function (userId, callback) {
- //  Instagram.users.recent({ user_id: userId,
- //    complete:function(user) {
- //      console.log(user);
   
 
   //set up pages
@@ -117,32 +111,56 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
   });
 
 
-app.get('/eva/eva', function (req, res) {
-  res.render('eva/eva', {
-      isAuthenticated: req.isAuthenticated(),
-      user: req.user
-    });
-});
-
-
-//eva tweets page setup
-  app.get('/eva/tweets', function (req, res) {
-    var url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=evachen212";
-      getTweets(url, function (allTweets) {
-      //eval(locus);
-      res.render('eva/tweets', {tweets: allTweets});
-    });
+  app.get('/eva/eva', function (req, res) {
+    res.render('eva/eva', {
+        isAuthenticated: req.isAuthenticated(),
+        user: req.user
+      });
   });
 
-//eva insta page set up
-app.get('/eva/insta', function (req, res) {
-  Instagram.users.recent({ user_id: 2098900,
-    complete:function(user) {
-      console.log(user);
-      // eval(locus);
-      res.render('eva/insta', {users: user});
-    }});
-});
+
+  //set up search page
+  app.get('/eva/search', function (req, res) {
+      res.render('eva/search');
+    });
+
+ //set up results page
+  app.get('/results', function (req, res) {
+    res.render('results');
+  });
+
+  //set up search form, send results to results page
+  app.get('/search', function (req, res) {
+    var handle = req.query.handle;
+    var url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + handle;
+
+    getTweets(url, function(allTweets) {
+      res.render('results', {tweets: allTweets});
+    });
+  }); //closing app.post
+
+  //VICTORY!!!!!!!!!!!!!!!!!!!!!!
+  //set up instagram results page
+  app.get('/resultsinsta', function (req, res) {
+    res.render('resultsinsta');
+  });
+
+  app.get('/searchinsta', function (req, res) {
+    var name = req.query.insta;
+    //find user by USERNAME
+    Instagram.users.search({ q: name,
+      complete:function(user) {
+        var id = user[0].id;
+        console.log("this is the user: ", id);
+
+        //find user using ID FROM PREV
+        Instagram.users.recent({ user_id: id,
+          complete:function(userid) {
+            res.render('resultsinsta', {users: userid});
+          }});
+      }});
+     });
+
 
   //set up home page
   app.get('/home', function (req, res) {
