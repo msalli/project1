@@ -188,7 +188,7 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
   app.post('/add', function (req, res) {
     db.influencer.create({fullname: req.body.fullname, twitterhandle: req.body.twitterhandle, instagram: req.body.instagram})
       .error(function(err) {
-        console.log("this is the err: ",err);
+        console.log("this is the err: ", err);
       })
       .success(function() {
         res.redirect('/home');
