@@ -125,8 +125,8 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
     });
 
  //set up results page
-  app.get('/results', function (req, res) {
-    res.render('results');
+  app.get('/resultstwit', function (req, res) {
+    res.render('resultstwit');
   });
 
   //TWITTER search form
@@ -135,7 +135,7 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
     var url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + handle;
 
     getTweets(url, function(allTweets) {
-      res.render('results', {tweets: allTweets});
+      res.render('resultstwit', {tweets: allTweets});
     });
   }); //closing app.post
 
@@ -158,14 +158,23 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
         //find user using ID FROM PREV
           Instagram.users.recent({ user_id: id,
             complete:function(userid) {
+              console.log("THIS IS THE USERID", userid);
+              // eval(locus);
               res.render('resultsinsta', {
                 metadata: user,
-                users: userid});
+                users: userid,
+                isAuthenticated: req.isAuthenticated(),
+                user: req.user
+              });
             }});
         }});
      });
 
-
+  //set up ALL results page
+  //attempt to combine twitter and instagram into one page
+  app.get('/results', function(req, res) {
+    res.render('results');
+  });
 
   //set up home page
   app.get('/home', function (req, res) {
@@ -173,6 +182,17 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
       isAuthenticated: req.isAuthenticated(),
       user: req.user
     });
+  });
+
+  //ADD INFLUENCER form
+  app.post('/add', function (req, res) {
+    db.influencer.create({fullname: req.body.fullname, twitterhandle: req.body.twitterhandle, instagram: req.body.instagram})
+      .error(function(err) {
+        console.log("this is the err: ",err);
+      })
+      .success(function() {
+        res.redirect('/home');
+      });
   });
 
   //set up user profile

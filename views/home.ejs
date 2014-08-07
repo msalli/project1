@@ -35,26 +35,83 @@
       </p>
     </div>
   </div>
+  
+
+
+
   <div class="row">
-    <div class="col-md-4">
-      <a href="/eva/eva"><p>Eva Chen</p></a> 
+    <div class="col-md-6">
+      <h3><em>fashion industry</em></h3>
+    </div>
+    <div class="col-md-6">
+      <h3><em>add someone cool</em></h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- HIDDEN FORM FOR EVA CHEN-->
+    <!-- TO INSTAGRAM FEED-->
+    <div class="col-md-3">
+      <p><strong>Eva Chen</strong></p>
       <p>Editor-in-Chief, Lucky Magazine</p>
-        <form action="POST ROUTE" method="post">
-          <input type="hidden" name="person" value="eva">
-        </form>
-   
+      <form action="/searchinsta">
+        <input type="hidden" name="insta" value="evachen212">
+        <input type="submit" value="view Eva's profile">
+      </form>
     </div>
 
-    <div class="col-md-4">
-      <a href="/eva/eva"><p>Eva Chen</p></a> 
-      <p>Editor-in-Chief, Lucky Magazine</p>
-    
+    <!-- HIDDEN FORM FOR HILLARY KERR-->
+    <!-- TO TWITTER FEED-->
+    <div class="col-md-3">
+      <p><strong>Hillary Kerr</strong></p>
+      <p>Co-Founder of WhoWhatWear, DomaineHome, and Byrdie</p>
+      <form action="/search">
+        <input type="hidden" name="handle" value="hillarykerr">
+        <input type="submit" value="view Hillary's profile">
+      </form>
     </div>
 
-     <div class="col-md-4">
-      <a href="/eva/eva"><p>Eva Chen</p></a> 
-      <p>Editor-in-Chief, Lucky Magazine</p>
-      
+
+      <!-- FORM FOR ADDING INFLUENCER TO DB-->
+       <div class="col-md-6">
+        <form method="post" action="/add">
+          <p>
+            <label for="fullname">name:</label>
+          </p>
+          <p>
+            <input type="text" name="fullname" id="fullname"placeholder="Choupette Lagerfeld" autofocus>
+          </p>
+          <p>
+            <label for="twitterhandle">twitter handle:</label>
+          </p>
+          <p>
+            <input type="text" name="twitterhandle" id="twitterhandle"placeholder="ChoupettesDiary">
+          </p>
+          <p>
+            <label for="instagram">instagram name: </label>
+          </p>
+          <p>
+            <input type="text" name="instagram" id="instagram" placeholder="choupettesdiary">
+          </p>
+          <p>
+            <input type="submit">
+          </p>
+      </form>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <h4><em>others: </em></h4>
+      <select>
+        <option value="">check out this list</option>
+        <option value="Cara D."> Cara D. </option>
+        <option value="Alexa Chung"> Alexa Chung </option>
+      </select>
+      <form action="/search">
+        <input type="hidden" name="handle" value="">
+        <input type="submit" value="view profile">
+      </form>
     </div>
   </div>
 

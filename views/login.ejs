@@ -1,10 +1,23 @@
 <%-include header.ejs %>
 
-    <nav>
-        <a href="/">welcome page</a>
-        <a href="/login">login</a>
-        
+     <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+         <div class="navbar-header">
+          <ul class="nav navbar-nav">
+            <li><a href="/">welcome page</a></li>
+            <li><a href="/login">login</a></li>
+            <li><a href="/signup">signup</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
+
+
+     <p style="color:hotpink">
+      <% if(message) { %>
+        <%= message %>
+        <% } %>
+    </p>
 
     <p>
       <h1> login here </h1>

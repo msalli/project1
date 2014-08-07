@@ -9,11 +9,15 @@ module.exports = function (sequelize, DataTypes) {
   var User = sequelize.define('user', {
     firstname: {
       type: DataTypes.STRING,
-      notEmpty: true
+      validate: {
+        notEmpty: true
+        }
     },
     lastname: {
       type: DataTypes.STRING,
-      notEmpty: true
+      validate: {
+        notEmpty: true
+      }
     },
     username: {
       type: DataTypes.STRING,
@@ -31,6 +35,9 @@ module.exports = function (sequelize, DataTypes) {
   }, //closing var User, second object
     {
       classMethods: {
+        associate: function (db) {
+          User.hasMany(db.influencer);
+        },
         //encrypt pass
         encryptPass: function (password) {
           var hash = bcrypt.hashSync(password, salt);

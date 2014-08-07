@@ -26,9 +26,7 @@
         <p><%= users[0].user.bio %></p>
       </div>
       <div class="col-md-3">
-        <button type="button" class="btn btn-default btn-lg">
-          <span class="glyphicon glyphicon-star"></span> Save to Dash
-        </button>
+        <input type="submit" value="Save">
       </div>
     </div>
 
@@ -38,7 +36,7 @@
           <p><a target="_blank" href="<%= user.link %>"><img src="<%= user.images.low_resolution.url %>"></a></p>
           <p><%= user.caption.text %></p>
           <p>Filter Used: <%= user.filter %></p>
-          <p>Likes: <%=  parseInt(user.likes.count) %> 
+          <p>Likes: <%= user.likes.count %> 
              Comment Count: <%= user.comments.count %></p>
         <% }) %>
       </div>

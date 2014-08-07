@@ -6,6 +6,12 @@
         <a href="/index/signup">sign up!</a>
     </nav>
 
+    <p style="color:hotpink">
+      <% if(message) { %>
+        <%= message %>
+        <% } %>
+    </p>
+
     <h1> sign up for an account </h1>
     <form method="post" action="/signup">
       <p>
