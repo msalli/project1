@@ -24,7 +24,10 @@
         <p><%= tweets[0].user.location %></p>
       </div>
       <div class="col-md-3">
-        <input type="submit" value="Save">
+        <form action="/user_influencers/<%= handle %>" method="post">
+          <input type="hidden" name="influencer[fullname]"value="<%= tweets[0].user.name %>">
+          <input type="submit" value="Save To Favorites">
+        </form>
       </div>
     </div>
 

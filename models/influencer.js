@@ -11,7 +11,9 @@ function Influencer(sequelize, DataTypes) {
   {
     classMethods: {
       associate: function (db) {
-        Influencer.hasMany(db.user);
+        Influencer.hasMany(db.user, {
+          through: "user_influencers"
+        });
       }
     } //closing inner classMethods
   } //closing outer classMethods

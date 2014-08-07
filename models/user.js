@@ -36,7 +36,9 @@ module.exports = function (sequelize, DataTypes) {
     {
       classMethods: {
         associate: function (db) {
-          User.hasMany(db.influencer);
+          User.hasMany(db.influencer, {
+            through: 'user_influencers'
+          });
         },
         //encrypt pass
         encryptPass: function (password) {

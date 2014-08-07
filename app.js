@@ -135,7 +135,7 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
     var url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + handle;
 
     getTweets(url, function(allTweets) {
-      res.render('resultstwit', {tweets: allTweets});
+      res.render('resultstwit', {tweets: allTweets, handle: handle});
     });
   }); //closing app.post
 
@@ -184,6 +184,25 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
     });
   });
 
+  app.post("/user_influencers/:handle", function (req, res) {
+    console.log("POSTED NEW FAVORITE")
+    var influencer = req.body.influencer;
+    influencer.twitterhandle = req.params.handle;
+
+    db.influencer.findOrCreate(influencer).success(function(influencer, created){
+      db.user_influencers.create({
+        userId: req.user.id,
+        influencerId: influencer.id
+      }).success(function(u_inf){
+        res.redirect("/home");
+      }).error(function(err){
+        res.redirect("/search?handle"+req.params.handle);
+      })
+    })
+    .error(function(err){
+      res.redirect("/search?handle"+req.params.handle);
+    })
+  });
   //ADD INFLUENCER form
   app.post('/add', function (req, res) {
     db.influencer.create({fullname: req.body.fullname, twitterhandle: req.body.twitterhandle, instagram: req.body.instagram})
