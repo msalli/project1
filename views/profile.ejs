@@ -1,6 +1,11 @@
 <%-include header.ejs %>
 
+<% if (!isAuthenticated) { %>
 
+<h1>You must be <a href="/login">logged in</a> to view this page</h1>
+
+<% } else { %>
+    
     <nav class="navbar navbar-inverse" role="navigation">
       <div class="container-fluid">
          <div class="navbar-header">
@@ -14,22 +19,18 @@
       </div>
     </nav>
 
-    <div>
-      <h2><%= tweets[0].user.name %></h2>
-      <img src="<%= tweets[0].user.profile_image_url%>">
-      <h3><%= tweets[0].user.location %></h3>
-      <p><%= tweets[0].user.description %></p> 
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center">
+        crème
+      </h1>
     </div>
+  </div> 
+ 
+  
 
-    <div>
-      <% tweets.forEach(function (tweet) { %>
-        <p><h4>Tweet: <%= tweet.text %></h4></p>
-        <p>Retweets: <%= tweet.retweet_count %> Favorites: <%= tweet.favorite_count %></p>
-        <p>Time Posted: <%= tweet.created_at %></p>
-      <% }); %>
-    </div>
 
 
 <%-include footer.ejs %>
 
-
+<% } %>

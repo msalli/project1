@@ -97,7 +97,7 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
   };
   
 
-  //set up pages
+//set up pages
 
  //welcome page setup
   app.get('/', function (req, res) {
@@ -110,7 +110,7 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
     }
   });
 
-
+  //to be deleted
   app.get('/eva/eva', function (req, res) {
     res.render('eva/eva', {
         isAuthenticated: req.isAuthenticated(),
@@ -129,7 +129,7 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
     res.render('results');
   });
 
-  //set up search form, send results to results page
+  //TWITTER search form
   app.get('/search', function (req, res) {
     var handle = req.query.handle;
     var url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + handle;
@@ -139,32 +139,46 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
     });
   }); //closing app.post
 
-  //VICTORY!!!!!!!!!!!!!!!!!!!!!!
+  
   //set up instagram results page
   app.get('/resultsinsta', function (req, res) {
     res.render('resultsinsta');
   });
 
+  //VICTORY!!!!!!!!!!!!!!!!!!!!!!
+  //INSTAGRAM search form
   app.get('/searchinsta', function (req, res) {
     var name = req.query.insta;
     //find user by USERNAME
     Instagram.users.search({ q: name,
       complete:function(user) {
         var id = user[0].id;
-        console.log("this is the user: ", id);
+        //WANT TO SET UP ERROR MESSAGE!!!!!
 
         //find user using ID FROM PREV
-        Instagram.users.recent({ user_id: id,
-          complete:function(userid) {
-            res.render('resultsinsta', {users: userid});
-          }});
-      }});
+          Instagram.users.recent({ user_id: id,
+            complete:function(userid) {
+              res.render('resultsinsta', {
+                metadata: user,
+                users: userid});
+            }});
+        }});
      });
+
 
 
   //set up home page
   app.get('/home', function (req, res) {
     res.render('home', {
+      isAuthenticated: req.isAuthenticated(),
+      user: req.user
+    });
+  });
+
+  //set up user profile
+  //should be /profile:id ?
+  app.get('/profile', function (req, res) {
+    res.render('profile', {
       isAuthenticated: req.isAuthenticated(),
       user: req.user
     });
@@ -180,7 +194,7 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
     }
   });
 
-  //form on signup page
+  //SIGNUP form
   app.post('/signup', function (req, res) {
     db.user.createNewUser(req.body.firstname, req.body.lastname, req.body.username, req.body.password,
       function(err) {
@@ -202,7 +216,7 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
     }
   });
 
-  //form on login page
+  //LOGIN form
   app.post('/login', passport.authenticate('local', {
     successRedirect: '/home',
     failureRedirect: '/login',
@@ -210,7 +224,7 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
   }));
 
 
-  //passport logout
+  //logout
   app.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');

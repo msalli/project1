@@ -7,6 +7,7 @@
           <ul class="nav navbar-nav">
             <li><a href="/home">home</a></li>
             <li><a href="/eva/search">search</a></li>
+            <li><a href="/profile">profile</a></li>
             <li><a href="/logout">logout</a></li>
           </ul>
         </div>
@@ -14,14 +15,33 @@
     </nav>
 
 
-    <div>
-      <% users.forEach(function (user) { %>
-        <p><img src="<%= user.images.low_resolution.url %>"></p>
-        <p><a href="<%= user.link %>">Visit Instagram</a></p>
-        <p><%= user.caption.text %></p>
-        <p>Filter Used: <%= user.filter %></p>
-        <p>Likes: <%=  user.likes.count %> Comment Count: <%= user.comments.count %></p>
-      <% }) %>
+    <div class="row">
+      <div class="col-md-2">
+        <p><img src="<%=metadata[0].profile_picture %>"></p>
+      </div>
+      <div class="col-md-7">
+        <h1><%= users[0].user.full_name %></h1>
+        <h3><%= metadata[0].bio %></h3>
+        <p><a target="_blank" href="<%metadata[0].website%>"><%=metadata[0].website %></a></p>
+        <p><%= users[0].user.bio %></p>
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-star"></span> Save to Dash
+        </button>
+      </div>
+    </div>
+
+     <div class="row" id="instagram">
+      <div class="col-md-4">
+        <% users.forEach(function (user) { %>
+          <p><a target="_blank" href="<%= user.link %>"><img src="<%= user.images.low_resolution.url %>"></a></p>
+          <p><%= user.caption.text %></p>
+          <p>Filter Used: <%= user.filter %></p>
+          <p>Likes: <%=  parseInt(user.likes.count) %> 
+             Comment Count: <%= user.comments.count %></p>
+        <% }) %>
+      </div>
     </div>
 
 <%-include footer.ejs %>
