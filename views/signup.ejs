@@ -12,8 +12,8 @@
       </div>
     </nav>
 
-    <div style="background-url: "class="jumbotron">
-      <h1 class="headerfont"> crème </h1>
+    <div style="background-image: url(http://isabelramoneda.com/wp-content/uploads/2013/03/isabel-ramoneda-intermediate2.jpg);" class="jumbotron">
+      <h1 class="text-center"> crème </h1>
     </div>
 
     <p style="color:hotpink">
@@ -22,31 +22,34 @@
         <% } %>
     </p>
 
+    <div class="row">
+      <div class="col-md-7 col-md-offset-1">
+      <h1> sign up for an account </h1>
+      <form method="post" action="/signup">
+        <p>
+          <label for="firstname">first name: </label>
+          <input type="text" name="firstname" id="firstname" placeholder="choupette" autofocus>
+        </p>
+        <p>
+          <label for="lastname">last name: </label>
+          <input type="text" name="lastname" id="lastname" placeholder="lagerfeld">
+        </p>
+        <p>
+          <label for="username">choose a username: </label>
+          <input type="text" name="username" id="username" placeholder="yung_karl">
+        </p>
 
-    <h1> sign up for an account </h1>
-    <form method="post" action="/signup">
-      <p>
-        <label for="firstname">first name: </label>
-        <input type="text" name="firstname" id="firstname" placeholder="choupette" autofocus>
-      </p>
-      <p>
-        <label for="lastname">last name: </label>
-        <input type="text" name="lastname" id="lastname" placeholder="lagerfeld">
-      </p>
-      <p>
-        <label for="username">choose a username: </label>
-        <input type="text" name="username" id="username" placeholder="yung_karl">
-      </p>
+        <p>
+          <label for="password">next, set the password: </label>
+          <input type="password" name="password" id="password" placeholder="the secret password">
+        </p>
 
-      <p>
-        <label for="password">next, set the password: </label>
-        <input type="password" name="password" id="password" placeholder="the secret password">
-      </p>
-
-      <p>
-        <input type="submit" value="sign up!">
-      </p>
-    </form>
+        <p>
+          <input type="submit" value="sign up!">
+        </p>
+      </form>
+      </div>
+    </div>
   
 
 
