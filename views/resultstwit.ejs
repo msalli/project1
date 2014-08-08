@@ -14,6 +14,7 @@
       </div>
     </nav>
 
+    <!-- INFLUENCER HEADER INFO -->
     <div class="row">
       <div class="col-md-2">
         <img src="<%= tweets[0].user.profile_image_url%>">
@@ -23,14 +24,17 @@
         <h4><%= tweets[0].user.description %></h4> 
         <p><%= tweets[0].user.location %></p>
       </div>
+
+      <!-- SAVE TO FAVORITES BUTTON -->
       <div class="col-md-3">
-        <form action="/user_influencers/<%= handle %>" method="post">
+        <form action="/user_influencers/twitter/<%= handle %>" method="post">
           <input type="hidden" name="influencer[fullname]"value="<%= tweets[0].user.name %>">
           <input type="submit" value="Save To Favorites">
         </form>
       </div>
     </div>
 
+      <!-- INFLUENCER RESULTS -->
      <div class="row">
       <div class="col-md-6">
         <% tweets.forEach(function (tweet) { %>

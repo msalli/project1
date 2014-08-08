@@ -14,22 +14,29 @@
       </div>
     </nav>
 
-
+    <!-- INFLUENCER HEADER INFO -->
     <div class="row">
       <div class="col-md-2">
         <p><img src="<%=metadata[0].profile_picture %>"></p>
       </div>
+
       <div class="col-md-7">
         <h1><%= users[0].user.full_name %></h1>
         <h3><%= metadata[0].bio %></h3>
         <p><a target="_blank" href="<%metadata[0].website%>"><%=metadata[0].website %></a></p>
         <p><%= users[0].user.bio %></p>
       </div>
+
+    <!-- SAVE TO FAVORITES BUTTON -->
       <div class="col-md-3">
-        <input type="submit" value="Save">
+         <form action="/user_influencers/insta/<%=insta%>" method="post">
+            <input type="hidden" name="influencer[fullname]" value="<%= users[0].user.full_name %>">
+            <input type="submit" value="Save To Favorites">
+        </form>
       </div>
     </div>
 
+    <!-- INFLUENCER RESULTS -->
      <div class="row" id="instagram">
       <div class="col-md-4">
         <% users.forEach(function (user) { %>

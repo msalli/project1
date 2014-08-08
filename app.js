@@ -163,6 +163,7 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
               res.render('resultsinsta', {
                 metadata: user,
                 users: userid,
+                insta: req.body.insta,
                 isAuthenticated: req.isAuthenticated(),
                 user: req.user
               });
@@ -184,8 +185,8 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
     });
   });
 
-  app.post("/user_influencers/:handle", function (req, res) {
-    console.log("POSTED NEW FAVORITE")
+  //SAVE TO FAVORITES: twitter pages
+  app.post('/user_influencers/twitter/:handle', function (req, res) {
     var influencer = req.body.influencer;
     influencer.twitterhandle = req.params.handle;
 
@@ -196,13 +197,35 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
       }).success(function(u_inf){
         res.redirect("/home");
       }).error(function(err){
-        res.redirect("/search?handle"+req.params.handle);
-      })
+        res.redirect('/search?handle' + req.params.handle);
+      });
     })
     .error(function(err){
-      res.redirect("/search?handle"+req.params.handle);
-    })
+      res.redirect('/search?handle' + req.params.handle);
+    });
   });
+
+  //SAVE TO FAVORITES: instagram pages
+  app.post('/user_influencers/insta/:insta', function (req, res) {
+    var influencer = req.body.influencer;
+    influencer.instagram = req.params.insta;
+
+    db.influencer.findOrCreate(influencer).success(function(influencer, created) {
+      db.user_influencers.create({
+        userId: req.user.id,
+        influencerId: influencer.id
+      }).success(function(u_inf) {
+        res.redirect("/home");
+      }).error(function(err) {
+        res.redirect('/search?insta' + req.params.insta);
+      });
+    })
+    .error(function(err) {
+      res.redirect('/search?insta' + req.params.insta);
+    });
+  });
+
+
   //ADD INFLUENCER form
   app.post('/add', function (req, res) {
     db.influencer.create({fullname: req.body.fullname, twitterhandle: req.body.twitterhandle, instagram: req.body.instagram})
@@ -224,7 +247,7 @@ Instagram.set('client_secret', process.env.INSTAGRAM_SECRET);
   });
 
   //set up sign up page
-  app.get('/index/signup', function (req, res) {
+  app.get('/signup', function (req, res) {
     if(!req.user) {
       res.render('signup', {message: null});
     }

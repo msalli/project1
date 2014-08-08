@@ -1,3 +1,11 @@
-.instagram {
-  color: red;
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.sans {
+  font-family: 'Arial', sans-serif;
+}
+
+.headerfont {
+  font-family: 'Raleway', sans-serif;
 }

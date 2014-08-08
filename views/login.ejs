@@ -4,7 +4,7 @@
       <div class="container-fluid">
          <div class="navbar-header">
           <ul class="nav navbar-nav">
-            <li><a href="/">welcome page</a></li>
+            <li><a href="/">about</a></li>
             <li><a href="/login">login</a></li>
             <li><a href="/signup">signup</a></li>
           </ul>
@@ -12,26 +12,43 @@
       </div>
     </nav>
 
-    <p>
-      <h1> login here </h1>
-    </p>
+    <div class="jumbotron">
+      <h1 class="headerfont"> crème </h1>
+    </div>
 
-    <form method="post" action="/login">
-      <p>
-        <label for="user">Username: </label>
-        <input type="text" name="username" id="user" placeholder="enter username" autofocus>
-      </p>
+    <div class="row">
+      <div class="center-block">
+        <div class="col-md-6 col-md-offset-6">
+          <p class="text-center">
+            <h1> login here </h1>
+          </p>
+        </div>
 
-      <p>
-        <label for="pass">Password: </label>
-        <input type="password" name="password" id="pass" placeholder="enter password">
-      </p>
+        <div class="col-md-6 col-md-offset-6">
+          <p class="text-center">
+            <form method="post" action="/login">
+            <p>
+              <label for="user">Username: </label>
+              <input type="text" name="username" id="user" placeholder="enter username" autofocus>
+            </p>
 
-      <p>
-        <input type="submit" value="Log In">
-      </p>
-    </form>
-  
-    <a href="/index/signup">Don't have an account? Sign up here!</a>
+            <p>
+              <label for="pass">Password: </label>
+              <input type="password" name="password" id="pass" placeholder="enter password">
+            </p>
 
+            <p>
+              <input type="submit" value="Log In">
+            </p>
+          </form>
+          </p>
+        </div>
+    
+        <div class="row">
+          <div class="col-md-6 col-md-offset-6">
+            <a href="/index/signup">Don't have an account? Sign up here!</a>
+          </div>
+        </div>
+      </div>
+    </div>
 <%-include footer.ejs %>
