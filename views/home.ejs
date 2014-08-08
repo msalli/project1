@@ -34,7 +34,7 @@
     <div class="col-md-6">
       <h3 class="sans"><em>fashion industry</em></h3>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5 col-md-offset-1">
       <h3 class="sans"><em>add someone cool</em></h3>
     </div>
   </div>
@@ -45,9 +45,24 @@
     <div class="col-md-3">
       <p class="sans"><strong>Eva Chen</strong></p>
       <p class="sans">Editor-in-Chief, Lucky Magazine</p>
+       <form action="/search">
+        <input type="hidden" name="handle" value="evachen212">
+        <input type="submit" class="sans" value="Eva's tweets">
+      </form>
       <form action="/searchinsta">
         <input type="hidden" name="insta" value="evachen212">
-        <input type="submit" class="sans" value="view Eva's profile">
+        <input type="submit" class="sans" value="Eva's instagram">
+      </form>
+
+        <p class="sans"><strong>Shea</strong></p>
+        <p class="sans">English television presenter, model and contributing editor at British Vogue. Author of 'It'</p>
+      <form action="/search">
+        <input type="hidden" name="handle" value="peaceloveshea">
+        <input type="submit" class="sans" value="Shea's tweets">
+      </form>
+      <form action="/searchinsta">
+        <input type="hidden" name="insta" value="peaceloveshea">
+        <input type="submit" class="sans" value="Shea's instagram">
       </form>
     </div>
 
@@ -58,13 +73,24 @@
       <p class="sans">Co-Founder of WhoWhatWear, DomaineHome, and Byrdie</p>
       <form action="/search">
         <input type="hidden" name="handle" value="hillarykerr">
-        <input type="submit" class="sans" value="view Hillary's profile">
+        <input type="submit" class="sans" value="Hillary's tweets">
+      </form>
+      <form action="/searchinsta">
+        <input type="hidden" name="insta" value="hillarykerr">
+        <input type="submit" class="sans" value="Hillary's instagram">
+      </form>
+
+        <p class="sans"><strong>Alexa Chung</strong></p>
+        <p class="sans">English television presenter, model and contributing editor at British Vogue. Author of 'It'</p>
+      <form action="/search">
+        <input type="hidden" name="handle" value="alexa_chung">
+        <input type="submit" class="sans" value="Alexa's tweets">
       </form>
     </div>
 
 
       <!-- FORM FOR ADDING INFLUENCER TO DB-->
-       <div class="col-md-6">
+       <div class="col-md-5 col-md-offset-1">
         <form method="post" action="/add">
           <p>
             <label class="sans"for="fullname">name:</label>
@@ -90,6 +116,25 @@
       </form>
       </div>
   </div>
+
+   <div class="row">
+    <!-- HIDDEN FORM FOR CHOUPETTE-->
+    <!-- TO TWITTER FEED-->
+     <div class="col-md-3">
+        <p class="sans"><strong>Choupette Lagerfeld</strong></p>
+        <p class="sans">Karl Lagerfeld's cat.</p>
+      <form action="/search">
+        <input type="hidden" name="handle" value="choupettesdiary">
+        <input type="submit" class="sans" value="Choupette's tweets">
+      </form>
+      <form action="/searchinsta">
+        <input type="hidden" name="insta" value="choupettesdiary">
+        <input type="submit" class="sans" value="Choupette's instagram">
+      </form>
+    </div>
+    </div>
+
+
 
 
 
